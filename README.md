@@ -13,11 +13,66 @@ This project implements an end-to-end Retrieval-Augmented Generation (RAG) pipel
 
 ## 🏗️ Architecture
 
-```text
-Google Drive → File Download → Text Splitter → Embeddings → Pinecone
-                                                        ↓
-User Query → AI Agent → Vector Retrieval → Context → Response
-```
+                    ┌───────────────────────────────┐
+                    │       Document Source         │
+                    │     Google Drive / Files      │
+                    └───────────────┬───────────────┘
+                                    │
+                                    ▼
+                     ┌───────────────────────────────┐
+                     │        File Download          │
+                     └───────────────┬───────────────┘
+                                     │
+                                     ▼
+                     ┌───────────────────────────────┐
+                     │      Text Loader / Parser     │
+                     └───────────────┬───────────────┘
+                                     │
+                                     ▼
+                     ┌───────────────────────────────┐
+                     │   Text Splitter / Chunking    │
+                     └───────────────┬───────────────┘
+                                     │
+                                     ▼
+                     ┌───────────────────────────────┐
+                     │   HuggingFace Embeddings      │
+                     └───────────────┬───────────────┘
+                                     │
+                                     ▼
+                     ┌───────────────────────────────┐
+                     │     Pinecone Vector Store     │
+                     └───────────────────────────────┘
+
+
+           User Query
+                │
+                ▼
+┌───────────────────────────────┐
+│        n8n Chat Trigger       │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│          AI Agent             │
+│      (Groq LLM powered)       │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│   Retrieve Relevant Chunks    │
+│     from Pinecone Vector DB   │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│   Context + User Question     │
+│        to Groq LLM            │
+└───────────────┬───────────────┘
+                │
+                ▼
+┌───────────────────────────────┐
+│       Final Response          │
+└───────────────────────────────┘
 
 ## ⚙️ Tech Stack
 
