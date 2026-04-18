@@ -94,7 +94,9 @@ This project implements an end-to-end Retrieval-Augmented Generation (RAG) pipel
 
 ## 📷 Workflow Screenshot
 
-_Add your screenshot here._
+<img width="1660" height="857" alt="ragn8n_architect" src="https://github.com/user-attachments/assets/ee2e4a25-20e2-41c1-b12c-3582737fdb40" />
+<img width="1653" height="683" alt="ragn8n_output" src="https://github.com/user-attachments/assets/31fc60f6-2add-4ae0-a4ad-b1530bc137e6" />
+
 
 ## 💡 Use Cases
 
